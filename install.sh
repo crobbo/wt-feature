@@ -23,11 +23,11 @@ echo ""
 echo "Configuration (press Enter to skip any option)"
 echo "-----------------------------------------------"
 
-read -p "Worktrees directory (leave empty for <repo>-worktrees beside your repo): " worktrees_dir
+read -p "Worktrees directory (leave empty for <repo>-worktrees beside your repo): " worktrees_dir < /dev/tty
 
-read -p "Files to copy to new worktrees (space-separated, e.g., 'config/master.key .env'): " files_to_copy
+read -p "Files to copy to new worktrees (space-separated, e.g., 'config/master.key .env'): " files_to_copy < /dev/tty
 
-read -p "Setup commands to run (e.g., 'bundle install && yarn install'): " setup_commands
+read -p "Setup commands to run (e.g., 'bundle install && yarn install'): " setup_commands < /dev/tty
 
 # Write config
 cat > "$CONFIG_DIR/config" << CONF
