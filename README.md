@@ -5,7 +5,7 @@ A CLI tool for creating git worktrees with automatic setup.
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/crobbo/wt-feature/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/crobbo/wt-feature/master/install.sh | bash
 ```
 
 ## Folder Structure
@@ -86,7 +86,7 @@ WT_SETUP_COMMANDS="bundle install && yarn install"
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/crobbo/wt-feature/main/uninstall.sh | bash
+curl -fsSL https://raw.githubusercontent.com/crobbo/wt-feature/master/uninstall.sh | bash
 ```
 
 Or manually:
