@@ -15,12 +15,14 @@ curl -fsSL https://raw.githubusercontent.com/crobbo/wt-feature/master/install.sh
 ├── your-repo/               # Main repository (auto-detected)
 │
 └── your-repo-worktrees/     # Worktrees live beside the main repo
-    ├── my-feature/
-    ├── existing-branch/
-    └── another-feature/
+    ├── feature-login/
+    ├── bugfix-issue-123/
+    └── hotfix-urgent/
 ```
 
 ## Usage
+
+### Create a worktree
 
 ```bash
 wt-feature <name> [base-branch]
@@ -28,6 +30,14 @@ wt-feature <name> [base-branch]
 
 - **name** - Branch name or feature name
 - **base-branch** - Base branch (optional, auto-detected based on branch type)
+
+### Remove a worktree
+
+```bash
+wt-remove <name>
+```
+
+Removes the worktree and cleans up. If you're inside the worktree, it moves you to the main repo first.
 
 ### Default Base Branches
 
@@ -54,6 +64,10 @@ wt-feature my-feature some-local-branch
 
 # Use existing branch
 wt-feature feature/existing-branch
+
+# Remove a worktree
+wt-remove feature-my-feature
+wt-remove feature/my-feature  # also works
 ```
 
 ## What It Does
