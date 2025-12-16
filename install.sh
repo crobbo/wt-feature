@@ -3,7 +3,7 @@ set -e
 
 INSTALL_DIR="${HOME}/.local/bin"
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/wt-feature"
-REPO_URL="https://raw.githubusercontent.com/crobbo/wt-feature/main"
+REPO_URL="https://raw.githubusercontent.com/crobbo/wt-feature/master"
 
 echo "wt-feature installer"
 echo "===================="
