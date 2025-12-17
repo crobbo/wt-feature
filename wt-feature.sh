@@ -138,6 +138,12 @@ wt-update() {
 }
 
 wt-remove() {
+  # Load config if exists
+  local WT_WORKTREES_DIR=""
+  if [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/wt-feature/config" ]]; then
+    source "${XDG_CONFIG_HOME:-$HOME/.config}/wt-feature/config"
+  fi
+
   local name="$1"
 
   if [[ -z "$name" ]]; then
