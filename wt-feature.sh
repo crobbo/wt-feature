@@ -98,7 +98,8 @@ wt-feature() {
   # Copy configured files
   if [[ -n "$WT_FILES_TO_COPY" ]]; then
     echo "Copying files..."
-    for file in $WT_FILES_TO_COPY; do
+    echo "$WT_FILES_TO_COPY" | tr ' ' '\n' | while read -r file; do
+      [[ -z "$file" ]] && continue
       if [[ -f "$src/$file" ]]; then
         local dir=$(dirname "$dest/$file")
         mkdir -p "$dir"
