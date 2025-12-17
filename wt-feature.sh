@@ -2,16 +2,12 @@
 # wt-feature - Git worktree helper for feature branch development
 # https://github.com/crobbo/wt-feature
 
-# Load config if exists
-[[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/wt-feature/config" ]] && \
-  source "${XDG_CONFIG_HOME:-$HOME/.config}/wt-feature/config"
-
-# Defaults
-: ${WT_WORKTREES_DIR:=""}
-: ${WT_FILES_TO_COPY:=""}
-: ${WT_SETUP_COMMANDS:=""}
-
 wt-feature() {
+  # Load config if exists (reload each invocation to pick up changes)
+  local WT_WORKTREES_DIR="" WT_FILES_TO_COPY="" WT_SETUP_COMMANDS=""
+  if [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/wt-feature/config" ]]; then
+    source "${XDG_CONFIG_HOME:-$HOME/.config}/wt-feature/config"
+  fi
   local name="$1"
   local base="$2"
   local branch_name
@@ -35,10 +31,16 @@ wt-feature() {
   fi
 
   # Must be run from within a git repository
-  local src
-  src="$(git rev-parse --show-toplevel 2>/dev/null)"
-  if [[ -z "$src" ]]; then
+  if ! git rev-parse --git-dir &>/dev/null; then
     echo "Error: Not in a git repository"
+    return 1
+  fi
+
+  # Find the main worktree (first line of git worktree list is always the main repo)
+  local src
+  src="$(git worktree list --porcelain | head -1 | sed 's/^worktree //')"
+  if [[ -z "$src" ]]; then
+    echo "Error: Could not determine main worktree"
     return 1
   fi
 
@@ -95,12 +97,15 @@ wt-feature() {
 
   # Copy configured files
   if [[ -n "$WT_FILES_TO_COPY" ]]; then
+    echo "Copying files..."
     for file in $WT_FILES_TO_COPY; do
       if [[ -f "$src/$file" ]]; then
         local dir=$(dirname "$dest/$file")
         mkdir -p "$dir"
         cp "$src/$file" "$dest/$file"
-        echo "Copied $file"
+        echo "  Copied: $file"
+      else
+        echo "  Skipped (not found): $src/$file"
       fi
     done
   fi
@@ -133,10 +138,16 @@ wt-remove() {
   fi
 
   # Must be run from within a git repository
-  local src
-  src="$(git rev-parse --show-toplevel 2>/dev/null)"
-  if [[ -z "$src" ]]; then
+  if ! git rev-parse --git-dir &>/dev/null; then
     echo "Error: Not in a git repository"
+    return 1
+  fi
+
+  # Find the main worktree (first line of git worktree list is always the main repo)
+  local src
+  src="$(git worktree list --porcelain | head -1 | sed 's/^worktree //')"
+  if [[ -z "$src" ]]; then
+    echo "Error: Could not determine main worktree"
     return 1
   fi
 

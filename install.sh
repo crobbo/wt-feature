@@ -55,7 +55,7 @@ echo "Config saved to: $CONFIG_DIR/config"
 add_to_shell_config() {
   local rc_file="$1"
   local source_line="source \"$INSTALL_DIR/wt-feature.sh\""
-  
+
   if [[ -f "$rc_file" ]]; then
     if ! grep -qF "wt-feature.sh" "$rc_file"; then
       echo "" >> "$rc_file"
@@ -93,6 +93,12 @@ echo ""
 echo "Installation complete!"
 echo ""
 echo "Restart your shell or run:"
-echo "  source \"$INSTALL_DIR/wt-feature.sh\""
+if [[ "$SHELL" == *"zsh"* ]]; then
+  echo "  source ~/.zshrc"
+elif [[ "$SHELL" == *"bash"* ]]; then
+  echo "  source ~/.bashrc"
+else
+  echo "  source your shell config file"
+fi
 echo ""
 echo "Then use: wt-feature <branch-name>"
