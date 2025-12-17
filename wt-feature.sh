@@ -22,9 +22,9 @@ wt-feature() {
     echo "  base-branch - Base branch (optional, auto-detected)"
     echo ""
     echo "Branch type defaults:"
-    echo "  hotfix/*  -> origin/main"
-    echo "  feature/* -> origin/develop"
-    echo "  bugfix/*  -> origin/develop"
+    echo "  hotfix/*  -> main"
+    echo "  feature/* -> develop"
+    echo "  bugfix/*  -> develop"
     echo ""
     echo "Configuration: ${XDG_CONFIG_HOME:-$HOME/.config}/wt-feature/config"
     return 1
@@ -55,11 +55,12 @@ wt-feature() {
   fi
 
   # Auto-select base branch if not provided
+  # Use local branch names to avoid setting up incorrect upstream tracking
   if [[ -z "$base" ]]; then
     if [[ "$branch_name" == hotfix/* ]]; then
-      base="origin/main"
+      base="main"
     else
-      base="origin/develop"
+      base="develop"
     fi
   fi
 

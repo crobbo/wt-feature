@@ -49,22 +49,22 @@ Downloads the latest version of wt-feature. Your configuration is preserved.
 
 ### Default Base Branches
 
-| Branch Type | Default Base    |
-|-------------|-----------------|
-| `hotfix/*`  | `origin/main`   |
-| `feature/*` | `origin/develop`|
-| `bugfix/*`  | `origin/develop`|
+| Branch Type | Default Base |
+|-------------|--------------|
+| `hotfix/*`  | `main`       |
+| `feature/*` | `develop`    |
+| `bugfix/*`  | `develop`    |
 
 ## Examples
 
 ```bash
-# New feature branch from origin/develop
+# New feature branch from develop
 wt-feature my-feature
 
-# New bugfix from origin/develop
+# New bugfix from develop
 wt-feature bugfix/login-issue
 
-# New hotfix from origin/main
+# New hotfix from main
 wt-feature hotfix/urgent
 
 # Branch off a specific local branch
