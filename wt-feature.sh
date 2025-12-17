@@ -121,6 +121,21 @@ wt-feature() {
   builtin cd "$dest"
 }
 
+wt-update() {
+  local install_dir="${HOME}/.local/bin"
+  local repo_url="https://raw.githubusercontent.com/crobbo/wt-feature/master"
+
+  echo "Updating wt-feature..."
+  if curl -fsSL "$repo_url/wt-feature.sh" -o "$install_dir/wt-feature.sh"; then
+    chmod +x "$install_dir/wt-feature.sh"
+    source "$install_dir/wt-feature.sh"
+    echo "Updated successfully!"
+  else
+    echo "Update failed. Check your internet connection."
+    return 1
+  fi
+}
+
 wt-remove() {
   local name="$1"
 
