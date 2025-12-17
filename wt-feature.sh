@@ -195,12 +195,7 @@ wt-remove() {
   fi
 
   echo "Removing worktree: $dest"
-  git worktree remove "$dest" || {
-    echo ""
-    echo "Failed to remove. If there are uncommitted changes, use:"
-    echo "  git worktree remove --force \"$dest\""
-    return 1
-  }
+  git worktree remove --force "$dest" || return 1
 
   echo "Worktree removed successfully"
 }
