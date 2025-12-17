@@ -39,6 +39,14 @@ wt-remove <name>
 
 Removes the worktree and cleans up. If you're inside the worktree, it moves you to the main repo first.
 
+### Update
+
+```bash
+wt-update
+```
+
+Downloads the latest version of wt-feature. Your configuration is preserved.
+
 ### Default Base Branches
 
 | Branch Type | Default Base    |
