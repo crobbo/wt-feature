@@ -1,6 +1,6 @@
 # wt-feature
 
-A CLI tool for creating git worktrees with automatic setup. Pairs nicely with [lazygit](https://github.com/jesseduffield/lazygit).
+Automates git worktree setup: creates the worktree, copies essential files, and runs your setup commands. Pairs nicely with [lazygit](https://github.com/jesseduffield/lazygit).
 
 ## Install
 
